@@ -3,6 +3,7 @@ import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import ExpoBanner from '@/components/ExpoBanner';
 import ScrollToTop from '@/components/ScrollToTop';
+import GoBack from '@/components/GoBack';
 import Footer from '@/components/Footer';
 import { HydrationGuard } from '@/components/HydrationGuard';
 import { IndustrialTerrain3D } from '@/components/IndustrialTerrain3D';
@@ -33,6 +34,7 @@ export default function RootLayout({
           <ExpoBanner />
           <Header />
           {children}
+          <GoBack />
           <ScrollToTop />
           <Footer />
         </div>
