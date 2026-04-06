@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react';
 import { X, Download, FileText, Video, Layout } from 'lucide-react';
 import styles from './ExpoModal.module.css';
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { registerModal, unregisterModal } from '@/services/modalManager';
 
 interface ExpoModalProps {
@@ -77,10 +78,13 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                         </button>
 
                         <motion.div className={styles.headerImage} variants={itemVariants}>
-                            <img
+                            <Image
                                 src="/images/expo/certificate.png"
                                 alt="Expo Certification"
+                                width={600}
+                                height={200}
                                 className={styles.certImage}
+                                priority
                             />
                             <div className={styles.imageOverlay} />
 
