@@ -20,6 +20,14 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
+/* Hide when modal is open */
+:global(body.has-modal-open) .goBack {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
 .goBack:hover {
     filter: brightness(0.9);
     transform: translateY(-5px);
