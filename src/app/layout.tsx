@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: 'Calypsion | Industrial Intelligence',
   description: 'Connect your factory floor to predictive intelligence.',
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 
