@@ -130,14 +130,14 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                                             whileTap={{ scale: 0.98 }}
                                         >
                                             <div className={styles.resVisual}>
-                                                <res.icon size={24} strokeWidth={1.5} />
+                                                <res.icon size={18} strokeWidth={2} />
                                             </div>
                                             <div className={styles.resMeta}>
                                                 <span className={styles.resTitle}>{res.name}</span>
                                                 <span className={styles.resSubtitle}>{res.type} DOWNLOAD</span>
                                             </div>
                                             <div className={styles.downloadCircle}>
-                                                <Download size={14} />
+                                                <Download size={10} />
                                             </div>
                                         </motion.a>
                                     ))}
