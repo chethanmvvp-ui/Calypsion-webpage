@@ -14,12 +14,12 @@ interface IframeModalProps {
 
 export function IframeModal({ url, title, onClose }: IframeModalProps) {
     const [isLoading, setIsLoading] = useState(true);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isCompactViewport, setIsCompactViewport] = useState(false);
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         registerModal();
-        const updateViewport = () => setIsMobile(window.innerWidth < 640);
+        const updateViewport = () => setIsCompactViewport(window.innerWidth <= 1024);
         updateViewport();
         window.addEventListener('resize', updateViewport);
         const timer = setTimeout(() => setIsLoading(false), 2000); // Minimum loading state for effect
@@ -58,32 +58,46 @@ export function IframeModal({ url, title, onClose }: IframeModalProps) {
                             Exit View &times;
                         </button>
 
-                        {isMobile && (
+                        {isCompactViewport && (
                             <div className={styles.mobileNotice} role="status" aria-live="polite">
                                 <MonitorSmartphone size={18} className={styles.mobileNoticeIcon} />
                                 <p className={styles.mobileNoticeText}>
-                                    For the best viewing experience, switch to desktop site in your browser or open this module on a desktop or tablet.
+                                    For the best viewing experience, switch to desktop site in your browser or open this module on a desktop device.
                                 </p>
                             </div>
                         )}
 
-                        <div className={styles.iframeWrapper}>
-                            {isLoading && (
-                                <div className={styles.loadingOverlay}>
-                                    <ShieldCheck size={40} className={styles.loaderPulse} color="var(--bg-secondary)" />
-                                    <span className={styles.loadingText}>Synchronizing Environment...</span>
-                                    <div className={styles.loaderPulse} />
-                                </div>
-                            )}
-                            <iframe
-                                src={url}
-                                className={styles.iframe}
-                                title={title}
-                                onLoad={() => setIsLoading(false)}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            />
-                        </div>
+                        {!isCompactViewport && (
+                            <div className={styles.iframeWrapper}>
+                                {isLoading && (
+                                    <div className={styles.loadingOverlay}>
+                                        <ShieldCheck size={40} className={styles.loaderPulse} color="var(--bg-secondary)" />
+                                        <span className={styles.loadingText}>Synchronizing Environment...</span>
+                                        <div className={styles.loaderPulse} />
+                                    </div>
+                                )}
+                                <iframe
+                                    src={url}
+                                    className={styles.iframe}
+                                    title={title}
+                                    onLoad={() => setIsLoading(false)}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        )}
+
+                        {isCompactViewport && (
+                            <div className={styles.mobileDesktopHint}>
+                                <h3 className={styles.mobileDesktopHintTitle}>Interactive module is optimized for larger screens</h3>
+                                <p className={styles.mobileDesktopHintText}>
+                                    Open this module on a desktop for better performance insights, and a complete live view.
+                                </p>
+                                <p className={styles.mobileDesktopHintText}>
+                                    If you are using a mobile browser, enable desktop site mode for a better viewing experience.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </motion.div>
             </motion.div>

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CyberText } from './CyberText';
 import styles from './ProductPortfolio.module.css';
@@ -51,31 +51,39 @@ const products = [
     }
 ];
 
+const AUTO_ROTATION_INTERVAL_MS = 5000;
+
 export default function ProductPortfolio() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isDevModalOpen, setIsDevModalOpen] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const rotationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const startCycle = () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            if (!isPaused && !isDevModalOpen) {
-                setActiveIndex((prev) => (prev + 1) % products.length);
-            }
-        }, 2000);
-    };
+    const clearRotationTimeout = useCallback(() => {
+        if (rotationTimeoutRef.current) {
+            clearTimeout(rotationTimeoutRef.current);
+            rotationTimeoutRef.current = null;
+        }
+    }, []);
+
+    const scheduleNextRotation = useCallback(() => {
+        clearRotationTimeout();
+
+        if (isPaused || isDevModalOpen) return;
+
+        rotationTimeoutRef.current = setTimeout(() => {
+            setActiveIndex((prev) => (prev + 1) % products.length);
+        }, AUTO_ROTATION_INTERVAL_MS);
+    }, [clearRotationTimeout, isPaused, isDevModalOpen]);
 
     useEffect(() => {
-        startCycle();
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [isPaused, isDevModalOpen]);
+        scheduleNextRotation();
+        return clearRotationTimeout;
+    }, [activeIndex, isPaused, isDevModalOpen, scheduleNextRotation, clearRotationTimeout]);
 
     const handleManualSelect = (index: number) => {
         setActiveIndex(index);
-        startCycle(); // Restart timer on click
+        scheduleNextRotation(); // Restart timer on click
     };
 
     return (
@@ -116,7 +124,7 @@ export default function ProductPortfolio() {
 
                     {/* Right Detail Pane */}
                     <div className={styles.displayArea}>
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence mode="wait" initial={false}>
                             <motion.div
                                 key={products[activeIndex].id}
                                 initial={{ opacity: 0, x: 20 }}
@@ -145,8 +153,8 @@ export default function ProductPortfolio() {
                                             </span>
                                         </div>
 
-                                        <h3 style={{ fontSize: '3rem', lineHeight: 1.1, marginBottom: '24px', textTransform: 'uppercase' }}>
-                                            <CyberText text={products[activeIndex].title} />
+                                        <h3 className={styles.productHeading}>
+                                            <CyberText text={products[activeIndex].title} preserveWords />
                                         </h3>
 
                                         <p className={styles.desc}>
@@ -157,8 +165,8 @@ export default function ProductPortfolio() {
                                             {products[activeIndex].features.map((f, i) => (
                                                 <motion.span
                                                     key={i}
-                                                    initial={{ scale: 0.8, opacity: 0 }}
-                                                    animate={{ scale: 1, opacity: 1 }}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
                                                     transition={{ delay: 0.3 + i * 0.1 }}
                                                     className={styles.featureTag}
                                                 >
@@ -175,8 +183,8 @@ export default function ProductPortfolio() {
                                         <motion.div
                                             key={key}
                                             className={styles.specItem}
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
                                             transition={{ delay: 0.4 + i * 0.1 }}
                                         >
                                             <span className={styles.specLabel}>{key}</span>

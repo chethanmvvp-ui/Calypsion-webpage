@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
@@ -8,6 +9,7 @@ import styles from './Header.module.css';
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [currentHash, setCurrentHash] = useState('');
+    const [isMobileView, setIsMobileView] = useState(false);
     const pathname = usePathname();
     const isPlatform = pathname.startsWith('/platform');
 
@@ -17,6 +19,13 @@ export default function Header() {
         handleHashChange(); // Initial check
         window.addEventListener('hashchange', handleHashChange);
         return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
+    useEffect(() => {
+        const updateViewport = () => setIsMobileView(window.innerWidth <= 768);
+        updateViewport();
+        window.addEventListener('resize', updateViewport);
+        return () => window.removeEventListener('resize', updateViewport);
     }, []);
 
     // Close menu on route change
@@ -41,11 +50,26 @@ export default function Header() {
     ];
 
     const navLinks = isPlatform ? platformLinks : homeLinks;
+    const contactButtonLabel = isPlatform ? 'SYSTEM_SYNC' : 'INITIATE_HANDSHAKE';
+
+    const handleContactClick = () => {
+        const target = document.querySelector('#contact');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
         <header className={`${styles.header} ${isMenuOpen ? styles.menuOpen : ''}`}>
             <div className={styles.headerContent}>
                 <Link href="/" className={styles.logo}>
+                    <span className={styles.mobileLogoBadge}>
+                        <Image
+                            src="/images/Logo2.png"
+                            alt="Calypsion Logo"
+                            width={16}
+                            height={16}
+                            className={styles.mobileLogoIcon}
+                        />
+                    </span>
                     <span className={styles.logoText}>
                         CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'}</span>
                     </span>
@@ -55,10 +79,7 @@ export default function Header() {
                     <div className={styles.headerAction}>
                         <button
                             className={styles.contactBtn}
-                            onClick={() => {
-                                const target = document.querySelector('#contact');
-                                if (target) target.scrollIntoView({ behavior: 'smooth' });
-                            }}
+                            onClick={handleContactClick}
                         >
                             {isPlatform ? 'SYSTEM_SYNC' : 'INITIATE_HANDSHAKE'}
                             <ChevronRight size={14} />
@@ -100,6 +121,21 @@ export default function Header() {
                             <ChevronRight className={styles.mobileLinkIcon} size={18} />
                         </Link>
                     ))}
+
+                    {isMobileView && (
+                        <button
+                            className={`${styles.mobileNavLink} ${styles.mobileContactAction}`}
+                            onClick={() => {
+                                setIsMenuOpen(false);
+                                handleContactClick();
+                            }}
+                            type="button"
+                        >
+                            <span className={styles.mobileLinkNumber}>0{navLinks.length + 1}</span>
+                            <span className={styles.mobileLinkText}>{contactButtonLabel}</span>
+                            <ChevronRight className={styles.mobileLinkIcon} size={18} />
+                        </button>
+                    )}
                 </nav>
             </div>
         </header>
