@@ -430,6 +430,7 @@
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
+  overflow-wrap: break-word;
 }
 
 @media (min-width: 1200px) {
@@ -440,13 +441,23 @@
 }
 
 .legalFooter span {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  line-height: 1.5;
 }
 
 .legalFooter b {
   color: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width: 1200px) {
+  .legalFooter span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1;
+  }
 }
 
 @media (max-width: 1199px) {
@@ -523,6 +534,10 @@
   .certNode {
     min-width: 100%;
   }
+
+  .legalFooter span {
+    word-break: break-word;
+  }
 }
 
 @media (max-width: 479px) {
@@ -570,5 +585,8 @@
   .legalFooter {
     margin-top: 40px;
     padding-top: 20px;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    gap: 10px;
   }
 }

@@ -5,14 +5,18 @@ export function CyberText({
     text, 
     className, 
     delay = 0, 
-    speed = 0.02 
+    speed = 0.02,
+    preserveWords = false
 }: { 
     text: string; 
     className?: string; 
     delay?: number;
     speed?: number;
+    preserveWords?: boolean;
 }) {
-    const characters = text.split("");
+    const segments = preserveWords
+        ? text.split(/(\s+)/)
+        : text.split("");
 
     const container: Variants = {
         hidden: { opacity: 1 },
@@ -46,16 +50,19 @@ export function CyberText({
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
         >
-            {characters.map((char, index) => (
+            {segments.map((segment, index) => (
                 <motion.span 
                     key={index} 
                     variants={child} 
-                    style={{ 
-                        display: "inline-block", 
-                        whiteSpace: char === " " ? "pre" : "normal" 
-                    }}
+                    style={
+                        preserveWords
+                            ? segment.trim() === ""
+                                ? { display: "inline", whiteSpace: "pre" }
+                                : { display: "inline-block", whiteSpace: "nowrap" }
+                            : { display: "inline-block", whiteSpace: segment.trim() === "" ? "pre" : "normal" }
+                    }
                 >
-                    {char}
+                    {segment}
                 </motion.span>
             ))}
         </motion.span>

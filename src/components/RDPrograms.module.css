@@ -217,6 +217,30 @@
         margin-bottom: 50px;
     }
 
+    .title {
+        font-size: clamp(1.9rem, 11vw, 2.6rem);
+        line-height: 1;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+
+    .title > span:first-child {
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+
+    .title br {
+        display: none;
+    }
+
+    .title > span {
+        display: block;
+        line-height: 1;
+    }
+
     .card {
         padding: 24px;
         min-height: 220px;
