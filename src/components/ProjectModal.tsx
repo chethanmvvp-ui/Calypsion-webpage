@@ -56,8 +56,10 @@ export function ProjectModal({ module, product, onClose, onLaunch }: ProjectModa
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('has-modal-open');
         return () => {
             document.body.style.overflow = 'auto';
+            document.body.classList.remove('has-modal-open');
         };
     }, []);
 

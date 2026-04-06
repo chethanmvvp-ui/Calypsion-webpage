@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import { X, Download, FileText, Video, Layout } from 'lucide-react';
 import styles from './ExpoModal.module.css';
+import { useEffect } from 'react';
 
 interface ExpoModalProps {
     isOpen: boolean;
@@ -48,6 +49,17 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
             transition: { type: 'spring' as const, stiffness: 200, damping: 20 }
         }
     };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('has-modal-open');
+        } else {
+            document.body.classList.remove('has-modal-open');
+        }
+        return () => {
+            document.body.classList.remove('has-modal-open');
+        };
+    }, [isOpen]);
 
     return (
         <AnimatePresence>

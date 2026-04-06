@@ -17,12 +17,14 @@ export function IframeModal({ url, title, onClose }: IframeModalProps) {
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('has-modal-open');
         const updateViewport = () => setIsMobile(window.innerWidth < 640);
         updateViewport();
         window.addEventListener('resize', updateViewport);
         const timer = setTimeout(() => setIsLoading(false), 2000); // Minimum loading state for effect
         return () => {
             document.body.style.overflow = 'auto';
+            document.body.classList.remove('has-modal-open');
             window.removeEventListener('resize', updateViewport);
             clearTimeout(timer);
         };

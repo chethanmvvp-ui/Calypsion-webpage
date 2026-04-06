@@ -11,6 +11,13 @@
     display: flex;
     align-items: center;
     font-family: var(--font-mono);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:global(body.has-modal-open) .banner {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 @keyframes bannerBlink {

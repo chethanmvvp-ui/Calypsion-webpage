@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './PilotRequestModal.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { sendEmail } from '@/services/emailService';
 
 interface PilotRequestModalProps {
@@ -79,6 +79,17 @@ export function PilotRequestModal({ isOpen, onClose, mode = 'pilot' }: PilotRequ
             setErrorMessage(result.error || 'Connection Failed');
         }
     };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('has-modal-open');
+        } else {
+            document.body.classList.remove('has-modal-open');
+        }
+        return () => {
+            document.body.classList.remove('has-modal-open');
+        };
+    }, [isOpen]);
 
     return (
         <AnimatePresence>
