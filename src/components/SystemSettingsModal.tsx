@@ -86,7 +86,7 @@ export default function SystemSettingsModal({ isOpen, onClose }: SystemSettingsM
                             <div className={styles.headerTitle}>
                                 <Settings2 size={16} />
                                 <span>SYSTEM_ORCHESTRATOR_V4.2.0</span>
-                                <span className={styles.diagInfo}>SYNC_STATUS: ACTIVE // BUILD: 060426</span>
+                                <span className={styles.diagInfo}>SYNC_STATUS: ACTIVE {" // "} BUILD: 060426</span>
                             </div>
                             <button className={styles.closeBtn} onClick={onClose}>
                                 <X size={14} /> ESC_EXIT
@@ -138,7 +138,7 @@ export default function SystemSettingsModal({ isOpen, onClose }: SystemSettingsM
                                                 opacity: editData.isVisible ? 1 : 0.2
                                             }}>
                                                 <div style={{ fontSize: '48px', fontWeight: 'bold' }}>{editData.title || 'EVENT_TITLE'}</div>
-                                                <div style={{ fontSize: '24px', opacity: 0.6 }}>{editData.location.toUpperCase()} // {editData.date}</div>
+                                                <div style={{ fontSize: '24px', opacity: 0.6 }}>{editData.location.toUpperCase()} {" // "} {editData.date}</div>
                                                 <div style={{ fontSize: '18px', background: '#CADBC7', color: '#000', padding: '4px 12px', width: 'fit-content' }}>BOOTH: {editData.booth}</div>
                                                 <div style={{ marginTop: 'auto', fontSize: '20px', lineHeight: 1.6, maxWidth: '600px' }}>{editData.description}</div>
                                                 {!editData.isVisible && (
