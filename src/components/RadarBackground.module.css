@@ -17,6 +17,8 @@
     margin-left: -100vw;
     background: conic-gradient(from 0deg, rgba(202, 219, 199, 0.4) 0deg, transparent 120deg);
     z-index: 1;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .hexGrid {

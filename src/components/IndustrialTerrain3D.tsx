@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import styles from './IndustrialTerrain3D.module.css';
 
 export function IndustrialTerrain3D() {
+    const [isMounted, setIsMounted] = useState(false);
     const mouseX = useMotionValue(0.5);
     const mouseY = useMotionValue(0.5);
 
-    // Fast but heavy lagging spring for premium fluid motion
-    const springConfig = { damping: 50, stiffness: 60, mass: 2 };
+    // Optimized spring for stability - slightly more damping to prevent overshoot jitter
+    const springConfig = { damping: 60, stiffness: 50, mass: 2 };
     const smoothX = useSpring(mouseX, springConfig);
     const smoothY = useSpring(mouseY, springConfig);
 
@@ -37,7 +38,10 @@ export function IndustrialTerrain3D() {
             scale: Math.random() * 0.5 + 0.5
         }));
         setRipples(initialRipples);
+        setIsMounted(true);
     }, []);
+
+    if (!isMounted) return <div className={styles.container} />;
 
     return (
         <div className={styles.container}>

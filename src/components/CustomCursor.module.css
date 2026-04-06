@@ -21,6 +21,20 @@
     background: transparent;
     mix-blend-mode: difference;
     opacity: 0.6;
+    will-change: transform;
+}
+
+.trailShadow {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: rgba(202, 219, 199, 0.2); /* Sage Glow */
+    margin-top: -16px;
+    margin-left: -16px;
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: -1;
+    will-change: transform, scale;
 }
 
 .dot {
@@ -32,4 +46,5 @@
     margin-top: -2px;
     margin-left: -2px;
     mix-blend-mode: difference;
+    will-change: transform;
 }
