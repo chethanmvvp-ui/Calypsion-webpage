@@ -65,34 +65,33 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                             <X size={24} />
                         </button>
 
-                        <div className={styles.contentStack}>
-                            {/* TOP: IMAGE FITTED */}
-                            <motion.div className={styles.headerImage} variants={itemVariants}>
-                                <img
-                                    src="/images/expo/certificate.png"
-                                    alt="Expo Certification"
-                                    className={styles.certImage}
-                                />
-                                <div className={styles.imageOverlay} />
+                        <motion.div className={styles.headerImage} variants={itemVariants}>
+                            <img
+                                src="/images/expo/certificate.png"
+                                alt="Expo Certification"
+                                className={styles.certImage}
+                            />
+                            <div className={styles.imageOverlay} />
 
-                                {/* SCANLINE ANIMATION */}
-                                <motion.div
-                                    className={styles.scanLine}
-                                    initial={{ top: '-10%' }}
-                                    animate={{ top: '110%' }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                />
+                            {/* SCANLINE ANIMATION */}
+                            <motion.div
+                                className={styles.scanLine}
+                                initial={{ top: '-10%' }}
+                                animate={{ top: '110%' }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            />
 
-                                <motion.div
-                                    className={styles.boothFloating}
-                                    initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.8, duration: 0.6 }}
-                                >
-                                    <span className={styles.boothLabel}>BOOTH IDENTIFIED: 20D-113</span>
-                                </motion.div>
+                            <motion.div
+                                className={styles.boothFloating}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.8, duration: 0.6 }}
+                            >
+                                <span className={styles.boothLabel}>BOOTH IDENTIFIED: 20D-113</span>
                             </motion.div>
+                        </motion.div>
 
+                        <div className={styles.scrollBody}>
                             {/* MIDDLE: INFO */}
                             <div className={styles.bodyInfo}>
                                 <motion.div className={styles.eventNameRow} variants={itemVariants}>
