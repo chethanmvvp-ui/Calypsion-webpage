@@ -136,7 +136,7 @@
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding-top: 22rem;
+    padding-top: 11rem;
   }
 
   .subtitle {
@@ -147,8 +147,8 @@
 @media (max-width: 640px) {
   .hero {
     padding: 0 4%;
-    padding-top: 24rem;
-    margin-top: 3rem;
+    padding-top: 9.25rem;
+    margin-top: 0.75rem;
   }
 
   .assetDecoration {
