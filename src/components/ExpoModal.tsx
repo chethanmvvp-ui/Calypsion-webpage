@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react';
 import { X, Download, FileText, Video, Layout } from 'lucide-react';
 import styles from './ExpoModal.module.css';
 import { useEffect } from 'react';
+import { registerModal, unregisterModal } from '@/services/modalManager';
 
 interface ExpoModalProps {
     isOpen: boolean;
@@ -52,13 +53,11 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
 
     useEffect(() => {
         if (isOpen) {
-            document.body.classList.add('has-modal-open');
-        } else {
-            document.body.classList.remove('has-modal-open');
+            registerModal();
+            return () => {
+                unregisterModal();
+            };
         }
-        return () => {
-            document.body.classList.remove('has-modal-open');
-        };
     }, [isOpen]);
 
     return (

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './IframeModal.module.css';
 import { useState, useEffect } from 'react';
 import { MonitorSmartphone, ShieldCheck } from 'lucide-react';
+import { registerModal, unregisterModal } from '@/services/modalManager';
 
 interface IframeModalProps {
     url: string;
@@ -17,14 +18,14 @@ export function IframeModal({ url, title, onClose }: IframeModalProps) {
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
-        document.body.classList.add('has-modal-open');
+        registerModal();
         const updateViewport = () => setIsMobile(window.innerWidth < 640);
         updateViewport();
         window.addEventListener('resize', updateViewport);
         const timer = setTimeout(() => setIsLoading(false), 2000); // Minimum loading state for effect
         return () => {
             document.body.style.overflow = 'auto';
-            document.body.classList.remove('has-modal-open');
+            unregisterModal();
             window.removeEventListener('resize', updateViewport);
             clearTimeout(timer);
         };

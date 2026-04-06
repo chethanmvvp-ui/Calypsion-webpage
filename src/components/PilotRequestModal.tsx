@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './PilotRequestModal.module.css';
 import { useState, useEffect } from 'react';
+import { registerModal, unregisterModal } from '@/services/modalManager';
 import { sendEmail } from '@/services/emailService';
 
 interface PilotRequestModalProps {
@@ -82,13 +83,11 @@ export function PilotRequestModal({ isOpen, onClose, mode = 'pilot' }: PilotRequ
 
     useEffect(() => {
         if (isOpen) {
-            document.body.classList.add('has-modal-open');
-        } else {
-            document.body.classList.remove('has-modal-open');
+            registerModal();
+            return () => {
+                unregisterModal();
+            };
         }
-        return () => {
-            document.body.classList.remove('has-modal-open');
-        };
     }, [isOpen]);
 
     return (

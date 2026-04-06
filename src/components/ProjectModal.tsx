@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import styles from './ProjectModal.module.css';
 import { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { registerModal, unregisterModal } from '@/services/modalManager';
 
 interface ProjectModalProps {
     module?: {
@@ -56,10 +57,10 @@ export function ProjectModal({ module, product, onClose, onLaunch }: ProjectModa
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
-        document.body.classList.add('has-modal-open');
+        registerModal();
         return () => {
             document.body.style.overflow = 'auto';
-            document.body.classList.remove('has-modal-open');
+            unregisterModal();
         };
     }, []);
 
