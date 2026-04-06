@@ -52,7 +52,7 @@ const products = [
     }
 ];
 
-const AUTO_ROTATION_INTERVAL_MS = 5000;
+const AUTO_ROTATION_INTERVAL_MS = 3000;
 
 export default function ProductPortfolio() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -81,24 +81,6 @@ export default function ProductPortfolio() {
         scheduleNextRotation();
         return clearRotationTimeout;
     }, [activeIndex, isPaused, isDevModalOpen, scheduleNextRotation, clearRotationTimeout]);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-    const startCycle = useCallback(() => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            if (!isPaused && !isDevModalOpen) {
-                setActiveIndex((prev) => (prev + 1) % products.length);
-            }
-        }, 2000);
-    }, [isPaused, isDevModalOpen]);
-
-    useEffect(() => {
-        startCycle();
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [startCycle]);
-
     const handleManualSelect = (index: number) => {
         setActiveIndex(index);
         scheduleNextRotation(); // Restart timer on click
@@ -158,7 +140,7 @@ export default function ProductPortfolio() {
                                             alt={products[activeIndex].title}
                                             fill
                                             className={styles.productImg}
-                                            style={{ objectFit: 'cover' }}
+                                            style={{ objectFit: 'contain' }}
                                         />
                                         <div style={{ position: 'absolute', bottom: 10, right: 10, fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.5 }}>
                                             [PREVIEW_RENDER_v1]

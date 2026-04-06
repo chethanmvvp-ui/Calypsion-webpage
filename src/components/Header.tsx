@@ -70,32 +70,19 @@ export default function Header() {
     };
 
     return (
-        <header className={`${styles.header} ${isMenuOpen ? styles.menuOpen : ''}`}>
-            <div className={styles.headerContent}>
-                <Link href="/" className={styles.logo}>
-                    <span className={styles.mobileLogoBadge}>
-                        <Image
-                            src="/images/Logo2.png"
-                            alt="Calypsion Logo"
-                            width={16}
-                            height={16}
-                            className={styles.mobileLogoIcon}
-                        />
-                    </span>
-                    <span className={styles.logoText}>
-                        CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'}</span>
-                    </span>
-                </Link>
-
-                <div className={styles.headerRight}>
-                    <div className={styles.headerAction}>
-                        <button
-                            className={styles.contactBtn}
-                            onClick={handleContactClick}
         <>
             <header className={`${styles.header} ${isMenuOpen ? styles.menuOpen : ''}`}>
                 <div className={styles.headerContent}>
                     <Link href="/" className={styles.logo}>
+                        <span className={styles.mobileLogoBadge}>
+                            <Image
+                                src="/images/Logo2.png"
+                                alt="Calypsion Logo"
+                                width={16}
+                                height={16}
+                                className={styles.mobileLogoIcon}
+                            />
+                        </span>
                         <span className={styles.logoText}>
                             CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'}</span>
                         </span>
@@ -103,32 +90,26 @@ export default function Header() {
 
                     <div className={styles.headerRight}>
                         <div className={styles.headerAction}>
-                            <button
-                                className={styles.contactBtn}
-                                onClick={() => {
-                                    const target = document.querySelector('#contact');
-                                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                            >
-                                {isPlatform ? 'SYSTEM_SYNC' : 'INITIATE_HANDSHAKE'}
+                            <button className={styles.contactBtn} onClick={handleContactClick} type="button">
+                                {contactButtonLabel}
                                 <ChevronRight size={14} />
                             </button>
                         </div>
 
-                        <button 
-                            className={styles.menuToggle} 
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        <button
+                            className={styles.menuToggle}
+                            onClick={() => setIsMenuOpen((prev) => !prev)}
                             aria-label="Toggle Menu"
+                            type="button"
                         >
                             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
                 </div>
 
-                {/* Hamburger Overlay Menu */}
                 <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ''}`}>
                     <nav className={styles.mobileNav}>
-                        {navLinks.map((link) => (
+                        {navLinks.map((link, index) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
@@ -143,47 +124,36 @@ export default function Header() {
                                             target.scrollIntoView({ behavior: 'smooth' });
                                         }
                                     }
-                                }
-                            }}
-                        >
-                            <span className={styles.mobileLinkNumber}>0{navLinks.indexOf(link) + 1}</span>
-                            <span className={styles.mobileLinkText}>{link.name}</span>
-                            <ChevronRight className={styles.mobileLinkIcon} size={18} />
-                        </Link>
-                    ))}
-
-                    {isMobileView && (
-                        <button
-                            className={`${styles.contactBtn} ${styles.mobileMenuContactBtn}`}
-                            onClick={() => {
-                                setIsMenuOpen(false);
-                                handleContactClick();
-                            }}
-                            type="button"
-                        >
-                            {contactButtonLabel}
-                            <ChevronRight size={14} />
-                        </button>
-                    )}
-                </nav>
-            </div>
-        </header>
                                 }}
                             >
-                                <span className={styles.mobileLinkNumber}>0{navLinks.indexOf(link) + 1}</span>
+                                <span className={styles.mobileLinkNumber}>0{index + 1}</span>
                                 <span className={styles.mobileLinkText}>{link.name}</span>
                                 <ChevronRight className={styles.mobileLinkIcon} size={18} />
                             </Link>
                         ))}
 
-                        {/* SYSTEM CONTROLS BUTTON */}
+                        {isMobileView && (
+                            <button
+                                className={`${styles.contactBtn} ${styles.mobileMenuContactBtn}`}
+                                onClick={() => {
+                                    setIsMenuOpen(false);
+                                    handleContactClick();
+                                }}
+                                type="button"
+                            >
+                                {contactButtonLabel}
+                                <ChevronRight size={14} />
+                            </button>
+                        )}
+
                         <div className={styles.settingsSection}>
-                            <button 
+                            <button
                                 className={styles.settingsToggle}
                                 onClick={() => {
                                     setIsMenuOpen(false);
                                     setIsSystemModalOpen(true);
                                 }}
+                                type="button"
                             >
                                 <Settings2 size={16} />
                                 <span>SYSTEM_CONTROLS</span>
@@ -194,10 +164,7 @@ export default function Header() {
                 </div>
             </header>
 
-            <SystemSettingsModal 
-                isOpen={isSystemModalOpen} 
-                onClose={() => setIsSystemModalOpen(false)} 
-            />
+            <SystemSettingsModal isOpen={isSystemModalOpen} onClose={() => setIsSystemModalOpen(false)} />
         </>
     );
 }
