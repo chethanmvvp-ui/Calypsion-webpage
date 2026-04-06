@@ -14,6 +14,10 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Calypsion | Industrial Intelligence',
   description: 'Connect your factory floor to predictive intelligence.',
+  icons: {
+    icon: '/images/Logo2.png',
+    apple: '/images/Logo2.png',
+  },
 };
 
 export default function RootLayout({
