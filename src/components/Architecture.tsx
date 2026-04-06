@@ -71,6 +71,7 @@ export default function Architecture() {
             className={styles.section}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            data-theme="sage"
         >
             <div className={`container ${styles.container}`}>
                 <FadeIn direction="up" className={styles.header}>

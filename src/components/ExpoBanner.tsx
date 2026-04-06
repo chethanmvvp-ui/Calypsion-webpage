@@ -1,12 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ArrowRight } from 'lucide-react';
+import { useExpo } from '@/context/ExpoContext';
 import ExpoModal from './ExpoModal';
 import styles from './ExpoBanner.module.css';
 
 export default function ExpoBanner() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { settings } = useExpo();
+
+    if (!settings.isVisible) return null;
 
     return (
         <>
@@ -25,9 +29,9 @@ export default function ExpoBanner() {
                         <span className={styles.divider} />
                         <div className={styles.eventInfo}>
                             <Calendar size={14} className={styles.icon} />
-                            <span className={styles.dateText}>7 - 8 - 9 APRIL</span>
-                            <span className={styles.locationTextDesktop}>| GITEX AFRICA 2026 | MOROCCO</span>
-                            <span className={styles.locationTextMobile}>GITEX AFRICA 2026 | MOROCCO</span>
+                            <span className={styles.dateText}>{settings.date}</span>
+                            <span className={styles.locationTextDesktop}>| {settings.title.toUpperCase()} | {settings.location}</span>
+                            <span className={styles.locationTextMobile}>{settings.title.toUpperCase()}</span>
                         </div>
                     </div>
 
@@ -44,10 +48,14 @@ export default function ExpoBanner() {
                 </div>
             </motion.div>
 
-            <ExpoModal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
-            />
+            <AnimatePresence>
+                {isModalOpen && (
+                    <ExpoModal 
+                        isOpen={isModalOpen} 
+                        onClose={() => setIsModalOpen(false)} 
+                    />
+                )}
+            </AnimatePresence>
         </>
     );
 }
