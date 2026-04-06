@@ -171,11 +171,11 @@ export default function Footer() {
 
                 <div className={styles.bottomBar}>
                     <div className={styles.copyright}>
-                        © 2025 CALYPSION_OS. SYSTEM_ENCRYPTED_OUTREACH.
+                        © 2025 CALYPSION_LLP. SYSTEM_ENCRYPTED_OUTREACH.
                     </div>
                     <div className={styles.legalLinks}>
-                        <Link href="#privacy">PRIVACY_PROTOCOL</Link>
-                        <Link href="#terms">TERMS_OF_SERVICE</Link>
+                        <p>PRIVACY_PROTOCOL</p>
+                        <p>TERMS_OF_SERVICE</p>
                     </div>
                 </div>
             </div>

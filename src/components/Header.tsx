@@ -84,7 +84,7 @@ export default function Header() {
                             />
                         </span>
                         <span className={styles.logoText}>
-                            CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'}</span>
+                            CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'} {isMobileView ? 'LLP' : ''}</span>
                         </span>
                     </Link>
 
