@@ -124,16 +124,15 @@ export default function Header() {
 
                     {isMobileView && (
                         <button
-                            className={`${styles.mobileNavLink} ${styles.mobileContactAction}`}
+                            className={`${styles.contactBtn} ${styles.mobileMenuContactBtn}`}
                             onClick={() => {
                                 setIsMenuOpen(false);
                                 handleContactClick();
                             }}
                             type="button"
                         >
-                            <span className={styles.mobileLinkNumber}>0{navLinks.length + 1}</span>
-                            <span className={styles.mobileLinkText}>{contactButtonLabel}</span>
-                            <ChevronRight className={styles.mobileLinkIcon} size={18} />
+                            {contactButtonLabel}
+                            <ChevronRight size={14} />
                         </button>
                     )}
                 </nav>

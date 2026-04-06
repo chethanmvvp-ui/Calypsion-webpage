@@ -172,6 +172,12 @@
   text-align: left;
 }
 
+.mobileMenuContactBtn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.65rem;
+}
+
 .mobileNavLink:last-child {
   border-bottom: none;
 }
@@ -241,6 +247,11 @@
   .contactBtn {
     padding: 6px 12px;
     font-size: 9px;
+  }
+
+  .mobileMenuContactBtn {
+    padding: 8px 12px;
+    font-size: 10px;
   }
 }
 
