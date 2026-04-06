@@ -206,16 +206,17 @@
 
 .workstationLabel {
     position: absolute;
-    bottom: -30px;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 2px;
-    color: #0a0f0a;
-    opacity: 2.5;
+    color: #000;
+    opacity: 1;
     white-space: nowrap;
     text-transform: uppercase;
+    font-weight: 700;
 }
 
 .modActive .workstationLabel {
