@@ -13,9 +13,9 @@ interface ExpoModalProps {
 
 export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
     const resources: { name: string; icon: LucideIcon; type: string; path: string }[] = [
-        { name: 'CALYPSION_PRESENTATION.PPT', icon: Layout, type: 'PPT', path: '/downloads/Calypsion_PPT.pdf' },
-        { name: 'CALYPSION_BROCHURE.PDF', icon: FileText, type: 'Brochure', path: '/downloads/Calypsion_Brochure.pdf' },
-        { name: 'CALYPSION_VIDEO.MP4', icon: Video, type: 'Video', path: '/downloads/Calypsion Video.mp4' },
+        { name: 'PITCH_DECK.PPT', icon: Layout, type: 'PPT', path: '/downloads/CALYPSION_PITCH_DECK.pdf' },
+        { name: 'INSIGHTS.PDF', icon: FileText, type: 'Brochure', path: '/downloads/CALYPSION_INSIGHTS.pdf' },
+        { name: 'BRAND_FILM.MP4', icon: Video, type: 'Video', path: '/downloads/CALYPSION_BRAND_FILM.mp4' },
     ];
 
     const containerVariants = {
