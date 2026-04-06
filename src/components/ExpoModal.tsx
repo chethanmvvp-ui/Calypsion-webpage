@@ -5,6 +5,7 @@ import { X, Download, FileText, Video, Layout } from 'lucide-react';
 import styles from './ExpoModal.module.css';
 import { useEffect } from 'react';
 import Image from 'next/image';
+import { useExpo } from '@/context/ExpoContext';
 import { registerModal, unregisterModal } from '@/services/modalManager';
 
 interface ExpoModalProps {
@@ -13,6 +14,7 @@ interface ExpoModalProps {
 }
 
 export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
+    const { settings } = useExpo();
     const resources: { name: string; icon: LucideIcon; type: string; path: string }[] = [
         { name: 'PITCH_DECK.PPT', icon: Layout, type: 'PPT', path: '/downloads/CALYPSION_PITCH_DECK.pdf' },
         { name: 'INSIGHTS.PDF', icon: FileText, type: 'Brochure', path: '/downloads/CALYPSION_INSIGHTS.pdf' },
@@ -79,8 +81,8 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
 
                         <motion.div className={styles.headerImage} variants={itemVariants}>
                             <Image
-                                src="/images/expo/certificate.png"
-                                alt="Expo Certification"
+                                src={settings.imageURL}
+                                alt={settings.title}
                                 width={600}
                                 height={200}
                                 className={styles.certImage}
@@ -102,7 +104,7 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ delay: 0.8, duration: 0.6 }}
                             >
-                                <span className={styles.boothLabel}>BOOTH IDENTIFIED: 20D-113</span>
+                                <span className={styles.boothLabel}>BOOTH IDENTIFIED: {settings.booth.toUpperCase()}</span>
                             </motion.div>
                         </motion.div>
 
@@ -111,8 +113,8 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                             <div className={styles.bodyInfo}>
                                 <motion.div className={styles.eventNameRow} variants={itemVariants}>
                                     <div className={styles.titleGroup}>
-                                        <h2 className={styles.title}>GITEX Africa 2026</h2>
-                                        <span className={styles.locationTag}>MARRAKESH, MOROCCO</span>
+                                        <h2 className={styles.title}>{settings.title}</h2>
+                                        <span className={styles.locationTag}>{settings.location.toUpperCase()}</span>
                                     </div>
                                     <motion.div
                                         className={styles.datesBadge}
@@ -120,13 +122,12 @@ export default function ExpoModal({ isOpen, onClose }: ExpoModalProps) {
                                         animate={{ scale: 1, opacity: 1 }}
                                         transition={{ delay: 1 }}
                                     >
-                                        7 - 8 - 9 APRIL
+                                        {settings.date.toUpperCase()}
                                     </motion.div>
                                 </motion.div>
 
                                 <motion.p className={styles.desc} variants={itemVariants}>
-                                    Connecting the next generation of industrial operations with our predictive AI ecosystem.
-                                    Join our technical engineers for a deep-dive walkthrough.
+                                    {settings.description}
                                 </motion.p>
                             </div>
 

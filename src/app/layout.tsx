@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { HydrationGuard } from '@/components/HydrationGuard';
 import StableIndustrialBackground from '@/components/StableIndustrialBackground';
 import { CustomCursor } from '@/components/CustomCursor';
+import { ExpoProvider } from '@/context/ExpoContext';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -23,19 +24,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <HydrationGuard>
-          <CustomCursor />
-          <StableIndustrialBackground />
-        </HydrationGuard>
-        <Sidebar />
-        <div className="page-wrapper">
-          <ExpoBanner />
-          <Header />
-          {children}
-          <GoBack />
-          <ScrollToTop />
-          <Footer />
-        </div>
+        <ExpoProvider>
+          <HydrationGuard>
+            <CustomCursor />
+            <StableIndustrialBackground />
+          </HydrationGuard>
+          <Sidebar />
+          <div className="page-wrapper">
+            <ExpoBanner />
+            <Header />
+            {children}
+            <GoBack />
+            <ScrollToTop />
+            <Footer />
+          </div>
+        </ExpoProvider>
       </body>
     </html>
   );
