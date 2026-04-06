@@ -1,0 +1,163 @@
+.testimonialsSection {
+    padding: 80px 0;
+    /* background-color: var(--bg-primary); */
+}
+
+.container {
+    max-width: 1300px;
+}
+
+.header {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.title {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    color: var(--text-primary);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 1024px) {
+    .cardContainer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+.quoteCard {
+    padding: 40px;
+    position: relative;
+    border: 1px solid var(--border-color);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    perspective: 1000px;
+    backface-visibility: hidden;
+}
+
+.quoteCard:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+    border-color: var(--bg-secondary);
+}
+
+.quoteIcon {
+    font-size: 4rem;
+    font-family: var(--font-display);
+    line-height: 1;
+    margin-bottom: -0.5rem;
+    opacity: 0.4;
+}
+
+.quoteWrapper {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.quoteText {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+.author {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 24px;
+}
+
+.authorName {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+.authorRole {
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* CTA Section Styles */
+.ctaSection {
+    padding: 80px 0;
+    /* background-color: var(--bg-primary); */
+}
+
+.ctaContainer {
+    max-width: 1100px;
+}
+
+.ctaBox {
+    padding: 60px;
+    background: black;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.ctaTitle {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 24px;
+    color: var(--bg-secondary);
+}
+
+.ctaSubtitle {
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: 48px;
+    opacity: 0.8;
+}
+
+.ctaActions {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .quoteCard {
+        padding: 40px;
+    }
+
+    .ctaBox {
+        padding: 60px 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .testimonialsSection {
+        padding: 50px 0;
+    }
+
+    .quoteCard {
+        padding: 28px;
+    }
+
+    .quoteText {
+        font-size: 1.1rem;
+    }
+
+    .ctaBox {
+        padding: 40px 16px;
+    }
+
+    .ctaActions {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .ctaActions > * {
+        width: 100%;
+    }
+}

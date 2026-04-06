@@ -1,0 +1,33 @@
+  ▲ Next.js 14.2.14
+  - Environments: .env
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/components/AboutSection.tsx
+Module not found: Can't resolve './AboutSection.module.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/components/Architecture.tsx
+Module not found: Can't resolve './Architecture.module.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/components/ContactSection.tsx
+Module not found: Can't resolve './ContactSection.module.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/components/CustomCursor.tsx
+Module not found: Can't resolve './CustomCursor.module.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/components/FullstackIoT.tsx
+Module not found: Can't resolve './FullstackIoT.module.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors

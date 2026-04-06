@@ -1,0 +1,42 @@
+import './globals.css';
+import Sidebar from '@/components/Sidebar';
+import Header from '@/components/Header';
+import ExpoBanner from '@/components/ExpoBanner';
+import ScrollToTop from '@/components/ScrollToTop';
+import Footer from '@/components/Footer';
+import { HydrationGuard } from '@/components/HydrationGuard';
+import { IndustrialTerrain3D } from '@/components/IndustrialTerrain3D';
+import { RadarBackground } from '@/components/RadarBackground';
+import { CustomCursor } from '@/components/CustomCursor';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Calypsion | Industrial Intelligence',
+  description: 'Connect your factory floor to predictive intelligence.',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <HydrationGuard>
+          <CustomCursor />
+          <IndustrialTerrain3D />
+          <RadarBackground />
+        </HydrationGuard>
+        <Sidebar />
+        <div className="page-wrapper">
+          <ExpoBanner />
+          <Header />
+          {children}
+          <ScrollToTop />
+          <Footer />
+        </div>
+      </body>
+    </html>
+  );
+}

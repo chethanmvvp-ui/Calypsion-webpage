@@ -1,0 +1,338 @@
+.section {
+  padding: 100px 0 160px 0;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 120px;
+}
+
+.blackBox {
+  background-color: #000000;
+  padding: 60px 80px 100px 80px;
+  position: relative;
+  color: #ffffff;
+  /* Large industrial chamfer */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%, 0 calc(100% - 80px));
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.metaTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--bg-secondary); /* Sage theme color */
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--bg-secondary); /* Sage theme color */
+  margin: 15px 0 35px 0;
+}
+
+.metaBottom {
+  display: flex;
+  gap: 60px;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metaLabel {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.metaValue {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 5px;
+}
+
+.pipelineSpace {
+  position: relative;
+  width: 100%;
+}
+
+.scanLine {
+  position: absolute;
+  top: -20px;
+  bottom: -20px;
+  width: 4px;
+  background-color: #3b82f6; /* Reference: Electric Blue */
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.stagesRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  perspective: 1500px; /* Enable 3D depth for the row */
+}
+
+.stageCard {
+  position: relative;
+  height: 340px;
+  padding: 45px 25px;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Smoother return */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  z-index: 1;
+  transform-style: preserve-3d;
+  /* Precision chamfer (cut-corner) */
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+}
+
+.stageCard:hover {
+  background-color: var(--bg-secondary);
+  /* Pronounced 3D 'Pop' forward */
+  transform: translateY(-20px) translateZ(60px) scale(1.08);
+  box-shadow: 0 40px 80px rgba(0, 59, 50, 0.2);
+  border-color: var(--bg-secondary);
+  z-index: 100; /* Force to front out of flow */
+}
+
+.active {
+  background-color: var(--bg-secondary);
+}
+
+.stageContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 10px;
+  text-align: center;
+}
+
+.iconBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stageCard:hover .iconBox {
+  transform: scale(1.15) translateY(-5px);
+}
+
+.iconBox svg {
+  color: #000000;
+  stroke-width: 1.5;
+  transition: transform 0.4s ease;
+}
+
+/* Floating animation for icons in the 'live' stage */
+.stageCard:hover .iconBox svg,
+.active .iconBox svg {
+  animation: iconFloat 4s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.iconLabel {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.textSection {
+  margin-top: auto;
+}
+
+.stageTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  color: #000000;
+  transition: transform 0.4s ease;
+}
+
+.stageCard:hover .stageTitle {
+  transform: translateY(-5px);
+}
+
+.stageDesc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s ease;
+}
+
+.stageCard:hover .stageDesc {
+  transform: translateY(-5px);
+}
+
+.connectorLine {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.beamPulse {
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  top: -1px;
+  background: var(--bg-secondary);
+  box-shadow: 0 0 15px var(--bg-secondary);
+}
+
+.platformFocus {
+  position: absolute;
+  left: 55%;
+  top: -100px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.focusIcon {
+  color: #3b82f6; /* Electric Blue matching scan-line */
+  filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.6));
+}
+
+.pulseRing,
+.pulseRing2 {
+  position: absolute;
+  border: 1px solid #3b82f6;
+  border-radius: 50%;
+  animation: ringAni 3s infinite linear;
+}
+
+.pulseRing {
+  width: 100px;
+  height: 100px;
+}
+.pulseRing2 {
+  width: 180px;
+  height: 180px;
+  animation-delay: 1.5s;
+}
+
+@keyframes ringAni {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .stagesRow {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .connectorLine {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .blackBox {
+    padding: 40px 24px 60px 24px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px));
+  }
+
+  .title {
+    font-size: clamp(2rem, 6vw, 4rem);
+  }
+
+  .metaBottom {
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .stageCard {
+    height: 340px;
+    padding: 32px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blackBox {
+    padding: 30px 16px 40px 16px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .metaTop {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .stagesRow {
+    gap: 30px;
+  }
+
+  .stageCard {
+    height: 340px;
+    padding: 24px 16px;
+  }
+
+  .stageTitle {
+    font-size: 1.4rem;
+  }
+}

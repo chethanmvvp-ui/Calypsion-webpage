@@ -1,0 +1,55 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    background-color: var(--bg-primary);
+    perspective: 1200px;
+    overflow: hidden;
+}
+
+.scene {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    transform-style: preserve-3d;
+}
+
+.terrainWrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.mesh {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 59, 50, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 59, 50, 0.4) 1px, transparent 1px);
+    background-size: 80px 80px;
+    transform-style: preserve-3d;
+}
+
+.ripple {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 2px solid rgba(0, 59, 50, 0.3);
+    border-radius: 50%;
+    transform: translateZ(80px);
+    filter: blur(8px);
+    box-shadow: inset 0 0 20px rgba(0, 59, 50, 0.1);
+}
+
+.fog {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, var(--bg-primary) 80%);
+    pointer-events: none;
+}

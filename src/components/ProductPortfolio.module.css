@@ -1,0 +1,230 @@
+.section {
+    padding: 120px 0;
+    /* background-color: var(--bg-primary); */
+    position: relative;
+    overflow: hidden;
+}
+
+.intro {
+    margin-bottom: 80px;
+}
+
+.title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.9;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+/* Two-Pane Hub Layout */
+.hubGrid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    min-height: 500px;
+}
+
+/* Sidebar Nav */
+.selector {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.productTab {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.4s var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.productTab:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #000000;
+}
+
+.activeTab {
+    background: var(--bg-secondary);
+    border-color: #000000;
+    box-shadow: 0 10px 20px rgba(0, 59, 50, 0.1);
+}
+
+.activeTab::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 6px;
+    height: 6px;
+    background: #000000;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.tabId {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-bottom: 4px;
+}
+
+.tabTitle {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+
+/* Detail Area */
+.displayArea {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #000000;
+    overflow: hidden;
+    padding: 40px;
+}
+
+/* Technical Details Overlay */
+.productHero {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.visualPane {
+    position: relative;
+    padding: 20px;
+    background: rgba(202, 219, 199, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.productImg {
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+    display: block;
+}
+
+/* Specs Table */
+.specsTable {
+    margin-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-top: 24px;
+}
+
+.specItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.specLabel {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+.specVal {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.desc {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+/* Features List */
+.featureList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.featureTag {
+    padding: 6px 12px;
+    background: #000000;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .hubGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .selector {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+
+    .productTab {
+        min-width: 240px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .productHero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .displayArea {
+        padding: 30px;
+    }
+
+    .specsTable {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .intro {
+        margin-bottom: 40px;
+    }
+
+    .displayArea {
+        padding: 20px;
+    }
+
+    .productTab {
+        min-width: 180px;
+        padding: 12px 16px;
+    }
+
+    .tabTitle {
+        font-size: 1rem;
+    }
+
+    .desc {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,118 @@
+/* Cursors */
+.trailingCursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--text-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+
+.crosshairWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.crosshairH {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 59, 50, 0.1);
+}
+
+.crosshairV {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: rgba(0, 59, 50, 0.1);
+}
+
+.crosshairReticle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--text-primary);
+    margin-top: -20px;
+    margin-left: -20px;
+    clip-path: polygon(0 0, 10px 0, 10px 1px, 0 1px, 0 10px, 1px 10px, 1px 0, 
+                       100% 0, 100% 10px, calc(100% - 1px) 10px, calc(100% - 1px) 1px, 100% 1px, 100% 0,
+                       100% 100%, calc(100% - 10px) 100%, calc(100% - 10px) calc(100% - 1px), 100% calc(100% - 1px), 100% calc(100% - 10px), calc(100% - 1px) calc(100% - 10px), calc(100% - 1px) 100%,
+                       0 100%, 0 calc(100% - 10px), 1px calc(100% - 10px), 1px calc(100% - 1px), 10px calc(100% - 1px), 10px 100%, 0 100%);
+}
+
+.bracketCursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    gap: 20px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.bracket {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    color: var(--text-primary);
+    font-weight: 200;
+}
+
+/* Background Elements */
+.flashlightContainer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--bg-primary);
+}
+
+.flashlightGrid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 59, 50, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 59, 50, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.flashlightAura {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+}
+
+.laserContainer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.laserH {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bg-secondary), transparent);
+    opacity: 0.3;
+}
+
+.laserV {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--bg-secondary), transparent);
+    opacity: 0.3;
+}

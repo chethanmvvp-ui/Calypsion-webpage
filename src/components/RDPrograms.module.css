@@ -1,0 +1,233 @@
+.section {
+    padding: 120px 0;
+    /* background-color: var(--bg-primary); */
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border-color);
+}
+
+.intro {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 80px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.9;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Universal Small Box Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    perspective: 1200px;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    min-height: 280px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover,
+.activeCard {
+    background: var(--bg-secondary);
+    border-color: #000;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+}
+
+.card:hover .cta,
+.activeCard .cta {
+    opacity: 1;
+    color: #000;
+}
+
+/* Uniform Bento Assignments */
+.bento1,
+.bento2,
+.bento3,
+.bento4,
+.bento5 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* Corner markers for module feel */
+.marker {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: #000;
+    opacity: 0.15;
+}
+
+.topLeft {
+    top: 20px;
+    left: 20px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+
+.bottomRight {
+    bottom: 20px;
+    right: 20px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.iconWrapper {
+    margin-bottom: 30px;
+    color: var(--text-primary);
+    position: relative;
+}
+
+/* Active Node Pulse */
+.nodePulse {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+    animation: nodePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes nodePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.5);
+    }
+}
+
+.cardTitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+}
+
+.desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.7;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.card:hover .cta {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* Coordinate System Overlay */
+.coord {
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    opacity: 0.2;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .bento1,
+    .bento2,
+    .bento3,
+    .bento4 {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 30px;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .intro {
+        margin-bottom: 50px;
+    }
+
+    .card {
+        padding: 24px;
+        min-height: 220px;
+    }
+
+    .cardTitle {
+        font-size: 1.2rem;
+    }
+
+    .desc {
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+}

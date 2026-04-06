@@ -1,0 +1,2 @@
+D:\Personal\Calypsion\Calypsion Web\src\app\globals.css
+D:\Personal\Calypsion\Calypsion Web\src\app\page.module.css

@@ -1,0 +1,396 @@
+.section {
+    padding: 120px 0;
+    min-height: 900px;
+    /* background-color: var(--bg-primary); */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro {
+    max-width: 600px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    z-index: 20;
+}
+
+.title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+/* Mechanical Rotation Hub Container */
+.hubSpace {
+    position: relative;
+    width: 1000px;
+    height: 800px;
+    perspective: 2000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hubWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Central Core */
+.mechanicalCore {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.coreCenter {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 120px;
+    height: 120px;
+    background: #000000;
+    transform: translate(-50%, -50%);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-secondary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.techRing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ring1 {
+    width: 180px;
+    height: 180px;
+    border-style: dashed;
+    animation: spin 20s linear infinite;
+}
+
+.ring2 {
+    width: 220px;
+    height: 220px;
+    border-width: 2px;
+    border-color: rgba(202, 219, 199, 0.3);
+    animation: spinReverse 15s linear infinite;
+}
+
+.ring3 {
+    width: 260px;
+    height: 260px;
+    border-style: dotted;
+    animation: spin 30s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes spinReverse {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+/* Orbital Stages */
+.stageOrbit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stageCard {
+    position: absolute;
+    width: 280px;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 2px solid #000000;
+    pointer-events: all;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+}
+
+.stageCard:hover,
+.activeStage {
+    background: var(--bg-secondary);
+    transform: scale(1.05) translateZ(50px);
+    box-shadow: 0 30px 60px rgba(0, 59, 50, 0.15);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+    border-color: #000000;
+}
+
+/* Positional Logic for 4 Stages */
+.stage0 {
+    top: 0%;
+    left: 40%;
+    transform: translateX(-50%);
+}
+
+/* Assess - TOP */
+.stage1 {
+    top: 40%;
+    right: 0px;
+    transform: translateY(-50%);
+}
+
+/* Connect - RIGHT */
+.stage2 {
+    bottom: 10%;
+    left: 40%;
+    transform: translateX(-50%);
+}
+
+/* Analyze - BOTTOM */
+.stage3 {
+    top: 40%;
+    left: 5%;
+    transform: translateY(-50%);
+}
+
+/* Optimize - LEFT */
+
+/* Leader Lines connecting to Core */
+.leaderLine {
+    position: absolute;
+    background: #000000;
+    opacity: 0.1;
+    z-index: 1;
+    height: 1px;
+}
+
+/* Active Beam pointing to stage */
+.activeBeam {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    height: 2px;
+    background: linear-gradient(90deg, #000000, var(--bg-secondary), transparent);
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.nodeIndex {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #000000;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.stageTitle {
+    font-size: 1.8rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.stageDesc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Carousel Styles - Base (hidden on desktop) */
+.carouselContainer {
+    display: none;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 20px;
+    flex-direction: column;
+}
+
+.carouselWrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carouselTrack {
+    display: flex;
+    gap: 16px;
+    cursor: grab;
+    touch-action: pan-y pinch-zoom;
+}
+
+.carouselTrack:active {
+    cursor: grabbing;
+}
+
+.carouselCard {
+    min-width: 100%;
+    flex: 0 0 100%;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.activeCarouselCard {
+    border-color: #000000;
+    background: var(--bg-secondary);
+    box-shadow: 0 20px 40px rgba(0, 59, 50, 0.1);
+}
+
+/* Progress Dots */
+.dotsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 16px 0;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.activeDot {
+    background: #000000;
+    transform: scale(1.2);
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+    .hubSpace {
+        width: 600px;
+        height: 600px;
+    }
+
+    .stageCard {
+        width: 220px;
+        padding: 24px;
+    }
+
+    .mechanicalCore {
+        width: 180px;
+        height: 180px;
+    }
+
+    .intro {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 60px;
+        text-align: center;
+    }
+
+    .section {
+        flex-direction: column;
+        padding: 80px 20px;
+        height: auto;
+        min-height: auto;
+    }
+}
+
+/* Tablet/Mobile: Hide desktop hub, show carousel */
+@media (max-width: 900px) {
+    .hubSpace {
+        display: none !important;
+    }
+
+    .carouselContainer {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+        overflow: hidden;
+        padding: 0 20px;
+    }
+
+    .intro {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 40px;
+        text-align: center;
+        padding: 0 20px;
+        max-width: 100%;
+    }
+
+    .section {
+        flex-direction: column;
+        padding: 60px 0;
+        min-height: auto;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile specific */
+@media (max-width: 600px) {
+    .section {
+        padding: 40px 0;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .intro p {
+        font-size: 0.95rem;
+    }
+
+    .stageTitle {
+        font-size: 1.4rem;
+    }
+
+    .stageDesc {
+        font-size: 0.85rem;
+    }
+}

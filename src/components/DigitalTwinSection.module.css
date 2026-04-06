@@ -1,0 +1,169 @@
+.section {
+    padding: 100px 0;
+    background-color: var(--bg-primary);
+}
+
+.headingArea {
+    margin-bottom: 60px;
+}
+
+.title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.dashboardContainer {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    background: transparent;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+.controls {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.controlBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+
+.visualizer {
+    position: relative;
+    aspect-ratio: 16/9;
+    background-color: rgba(0, 59, 50, 0.02);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.robotImage {
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+}
+
+.overlayGlow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 100px rgba(0, 59, 50, 0.05);
+}
+
+.metricsHeader {
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 40px 0 20px 0;
+    opacity: 0.6;
+}
+
+.metricsGrid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+}
+
+.chartPanel {
+    padding: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.chartArea {
+    position: relative;
+    height: 300px;
+}
+
+.telemetryTable {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border-color);
+}
+
+.telemetryRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.telemetryRow:last-child {
+    border-bottom: none;
+}
+
+.paramLabel {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.paramValue {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .dashboardContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .metricsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .dashboardContainer {
+        padding: 20px;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .controlBtn {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+
+    .chartArea {
+        height: 200px;
+    }
+
+    .telemetryRow {
+        padding: 12px 16px;
+    }
+}
