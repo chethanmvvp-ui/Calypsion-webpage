@@ -185,6 +185,11 @@ a {
   padding: 6rem 0;
   border-bottom: 1px solid var(--border-color);
   scroll-margin-top: 130px; /* Offset for Banner + Header */
+  transition: scroll-margin-top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.has-no-banner .section {
+  scroll-margin-top: 70px; /* Offset for Header only (70px height) */
 }
 
 /* ==========================================

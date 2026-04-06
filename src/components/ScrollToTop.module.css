@@ -20,6 +20,21 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
 }
 
+.onSage {
+    background-color: #000 !important;
+    color: var(--bg-secondary) !important;
+    border-color: #000 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Hide when modal is open */
+:global(body.has-modal-open) .scrollTop {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
 .scrollTop:hover {
     filter: brightness(0.9); /* Subtle darken on hover */
     transform: translateY(-5px);

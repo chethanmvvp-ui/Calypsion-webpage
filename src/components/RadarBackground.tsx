@@ -1,9 +1,17 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './RadarBackground.module.css';
 
 export function RadarBackground() {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return <div className={styles.container} />;
     return (
         <div className={styles.container}>
             {/* 1. Radar Sweep / Scanning Beam */}

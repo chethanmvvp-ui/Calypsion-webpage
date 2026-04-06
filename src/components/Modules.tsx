@@ -5,6 +5,7 @@ import styles from './Modules.module.css';
 import type { TargetAndTransition, Variants } from 'framer-motion';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeIn } from './FadeIn';
+import Image from 'next/image';
 import { ProjectModal } from './ProjectModal';
 import { IframeModal } from './IframeModal';
 import type { LucideIcon } from 'lucide-react';
@@ -165,16 +166,13 @@ const modulesData: PlatformModule[] = [
 ];
 
 const hudContainerVariants: Variants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95, filter: 'blur(10px)' },
+    hidden: { opacity: 0, y: 30 },
     visible: {
         opacity: 1,
         y: 0,
-        scale: 1,
-        filter: 'blur(0px)',
         transition: {
-            duration: 0.6,
-            ease: [0.16, 1, 0.3, 1],
-            staggerChildren: 0.1
+            duration: 0.3,
+            ease: "easeOut"
         }
     }
 };
@@ -292,7 +290,13 @@ export default function Modules() {
                                         className={styles.floatingHud}
                                     >
                                         <div className={styles.hudImageWrapper}>
-                                            <img src={activeModule.image} alt={activeModule.title} className={styles.hudImage} />
+                                            <Image
+                                                src={activeModule.image}
+                                                alt={activeModule.title}
+                                                fill
+                                                className={styles.hudImage}
+                                                style={{ objectFit: 'cover' }}
+                                            />
                                         </div>
                                         <div className={styles.hudInfo}>
                                             <span className={styles.hudId}>CAPABILITY_ID: {activeModule.id}</span>

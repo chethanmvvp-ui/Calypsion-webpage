@@ -3,11 +3,12 @@ import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import ExpoBanner from '@/components/ExpoBanner';
 import ScrollToTop from '@/components/ScrollToTop';
+import GoBack from '@/components/GoBack';
 import Footer from '@/components/Footer';
 import { HydrationGuard } from '@/components/HydrationGuard';
-import { IndustrialTerrain3D } from '@/components/IndustrialTerrain3D';
-import { RadarBackground } from '@/components/RadarBackground';
+import StableIndustrialBackground from '@/components/StableIndustrialBackground';
 import { CustomCursor } from '@/components/CustomCursor';
+import { ExpoProvider } from '@/context/ExpoContext';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -23,19 +24,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <HydrationGuard>
-          <CustomCursor />
-          <IndustrialTerrain3D />
-          <RadarBackground />
-        </HydrationGuard>
-        <Sidebar />
-        <div className="page-wrapper">
-          <ExpoBanner />
-          <Header />
-          {children}
-          <ScrollToTop />
-          <Footer />
-        </div>
+        <ExpoProvider>
+          <HydrationGuard>
+            <CustomCursor />
+            <StableIndustrialBackground />
+          </HydrationGuard>
+          <Sidebar />
+          <div className="page-wrapper">
+            <ExpoBanner />
+            <Header />
+            {children}
+            <GoBack />
+            <ScrollToTop />
+            <Footer />
+          </div>
+        </ExpoProvider>
       </body>
     </html>
   );

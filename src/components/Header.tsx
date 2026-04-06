@@ -3,15 +3,19 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ChevronRight, Menu, X } from 'lucide-react';
+import { ChevronRight, Menu, X, Settings2 } from 'lucide-react';
+import { useExpo } from '@/context/ExpoContext';
 import styles from './Header.module.css';
+import SystemSettingsModal from './SystemSettingsModal';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSystemModalOpen, setIsSystemModalOpen] = useState(false);
     const [currentHash, setCurrentHash] = useState('');
     const [isMobileView, setIsMobileView] = useState(false);
     const pathname = usePathname();
     const isPlatform = pathname.startsWith('/platform');
+    const { settings } = useExpo();
 
     // Sync hash state on load and hashChange
     useEffect(() => {
@@ -27,6 +31,14 @@ export default function Header() {
         window.addEventListener('resize', updateViewport);
         return () => window.removeEventListener('resize', updateViewport);
     }, []);
+    // Sync body class for banner visibility
+    useEffect(() => {
+        if (!settings.isVisible) {
+            document.body.classList.add('has-no-banner');
+        } else {
+            document.body.classList.remove('has-no-banner');
+        }
+    }, [settings.isVisible]);
 
     // Close menu on route change
     useEffect(() => {
@@ -80,38 +92,56 @@ export default function Header() {
                         <button
                             className={styles.contactBtn}
                             onClick={handleContactClick}
+        <>
+            <header className={`${styles.header} ${isMenuOpen ? styles.menuOpen : ''}`}>
+                <div className={styles.headerContent}>
+                    <Link href="/" className={styles.logo}>
+                        <span className={styles.logoText}>
+                            CALYPSION <span className={styles.logoAccent}>{isPlatform ? 'PLATFORM' : 'INNOVATION'}</span>
+                        </span>
+                    </Link>
+
+                    <div className={styles.headerRight}>
+                        <div className={styles.headerAction}>
+                            <button
+                                className={styles.contactBtn}
+                                onClick={() => {
+                                    const target = document.querySelector('#contact');
+                                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            >
+                                {isPlatform ? 'SYSTEM_SYNC' : 'INITIATE_HANDSHAKE'}
+                                <ChevronRight size={14} />
+                            </button>
+                        </div>
+
+                        <button 
+                            className={styles.menuToggle} 
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle Menu"
                         >
-                            {isPlatform ? 'SYSTEM_SYNC' : 'INITIATE_HANDSHAKE'}
-                            <ChevronRight size={14} />
+                            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
-
-                    <button 
-                        className={styles.menuToggle} 
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle Menu"
-                    >
-                        {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                    </button>
                 </div>
-            </div>
 
-            {/* Hamburger Overlay Menu */}
-            <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ''}`}>
-                <nav className={styles.mobileNav}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`${styles.mobileNavLink} ${currentHash === link.href ? styles.navActive : ''}`}
-                            onClick={(e: React.MouseEvent) => {
-                                setIsMenuOpen(false);
-                                setCurrentHash(link.href);
-                                if (link.href.startsWith('#')) {
-                                    e.preventDefault();
-                                    const target = document.querySelector(link.href);
-                                    if (target) {
-                                        target.scrollIntoView({ behavior: 'smooth' });
+                {/* Hamburger Overlay Menu */}
+                <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ''}`}>
+                    <nav className={styles.mobileNav}>
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={`${styles.mobileNavLink} ${currentHash === link.href ? styles.navActive : ''}`}
+                                onClick={(e: React.MouseEvent) => {
+                                    setIsMenuOpen(false);
+                                    setCurrentHash(link.href);
+                                    if (link.href.startsWith('#')) {
+                                        e.preventDefault();
+                                        const target = document.querySelector(link.href);
+                                        if (target) {
+                                            target.scrollIntoView({ behavior: 'smooth' });
+                                        }
                                     }
                                 }
                             }}
@@ -138,5 +168,36 @@ export default function Header() {
                 </nav>
             </div>
         </header>
+                                }}
+                            >
+                                <span className={styles.mobileLinkNumber}>0{navLinks.indexOf(link) + 1}</span>
+                                <span className={styles.mobileLinkText}>{link.name}</span>
+                                <ChevronRight className={styles.mobileLinkIcon} size={18} />
+                            </Link>
+                        ))}
+
+                        {/* SYSTEM CONTROLS BUTTON */}
+                        <div className={styles.settingsSection}>
+                            <button 
+                                className={styles.settingsToggle}
+                                onClick={() => {
+                                    setIsMenuOpen(false);
+                                    setIsSystemModalOpen(true);
+                                }}
+                            >
+                                <Settings2 size={16} />
+                                <span>SYSTEM_CONTROLS</span>
+                                <ChevronRight size={14} style={{ marginLeft: 'auto' }} />
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <SystemSettingsModal 
+                isOpen={isSystemModalOpen} 
+                onClose={() => setIsSystemModalOpen(false)} 
+            />
+        </>
     );
 }

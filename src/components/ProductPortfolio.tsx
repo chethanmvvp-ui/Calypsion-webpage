@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { CyberText } from './CyberText';
 import styles from './ProductPortfolio.module.css';
 import { ArrowRight } from 'lucide-react';
@@ -80,6 +81,23 @@ export default function ProductPortfolio() {
         scheduleNextRotation();
         return clearRotationTimeout;
     }, [activeIndex, isPaused, isDevModalOpen, scheduleNextRotation, clearRotationTimeout]);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    const startCycle = useCallback(() => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            if (!isPaused && !isDevModalOpen) {
+                setActiveIndex((prev) => (prev + 1) % products.length);
+            }
+        }, 2000);
+    }, [isPaused, isDevModalOpen]);
+
+    useEffect(() => {
+        startCycle();
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [startCycle]);
 
     const handleManualSelect = (index: number) => {
         setActiveIndex(index);
@@ -135,10 +153,12 @@ export default function ProductPortfolio() {
                             >
                                 <div className={styles.productHero}>
                                     <div className={styles.visualPane}>
-                                        <img
+                                        <Image
                                             src={products[activeIndex].image}
                                             alt={products[activeIndex].title}
+                                            fill
                                             className={styles.productImg}
+                                            style={{ objectFit: 'cover' }}
                                         />
                                         <div style={{ position: 'absolute', bottom: 10, right: 10, fontSize: '9px', fontFamily: 'var(--font-mono)', opacity: 0.5 }}>
                                             [PREVIEW_RENDER_v1]

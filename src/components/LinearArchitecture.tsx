@@ -3,7 +3,7 @@
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import styles from './LinearArchitecture.module.css';
 import { Factory, Sun, Wind, Truck, Radio, Wifi, Share2, Cloud, Database, BarChart3, Globe } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const pipelineStages = [
     {
@@ -41,7 +41,7 @@ export default function LinearArchitecture() {
     const [isPaused, setIsPaused] = useState(false);
     const scanControls = useAnimation();
 
-    const startScan = async () => {
+    const startScan = useCallback(async () => {
         await scanControls.start({
             left: '100%',
             transition: { duration: 8, ease: "linear" }
@@ -50,7 +50,7 @@ export default function LinearArchitecture() {
         setActiveStage(-1);
         await scanControls.set({ left: '0%' });
         if (!isPaused) startScan();
-    };
+    }, [scanControls, isPaused]);
 
     useEffect(() => {
         if (!isPaused) {
@@ -58,7 +58,7 @@ export default function LinearArchitecture() {
         } else {
             scanControls.stop();
         }
-    }, [isPaused]);
+    }, [isPaused, startScan, scanControls]);
 
     // Use motion value to trigger active stage based on scan position
     // (Simulated with keyframes for simplicity in this implementation)
