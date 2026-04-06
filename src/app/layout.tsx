@@ -6,8 +6,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import GoBack from '@/components/GoBack';
 import Footer from '@/components/Footer';
 import { HydrationGuard } from '@/components/HydrationGuard';
-import { IndustrialTerrain3D } from '@/components/IndustrialTerrain3D';
-import { RadarBackground } from '@/components/RadarBackground';
+import StableIndustrialBackground from '@/components/StableIndustrialBackground';
 import { CustomCursor } from '@/components/CustomCursor';
 import type { Metadata } from 'next';
 
@@ -26,8 +25,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <HydrationGuard>
           <CustomCursor />
-          <IndustrialTerrain3D />
-          <RadarBackground />
+          <StableIndustrialBackground />
         </HydrationGuard>
         <Sidebar />
         <div className="page-wrapper">
