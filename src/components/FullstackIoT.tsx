@@ -68,7 +68,7 @@ export default function FullstackIoT() {
                                     <span className={styles.val}>{card.metric}</span>
                                     <span className={styles.lab}>{card.label}</span>
                                 </div>
-                                <div className={styles.arrow}>→</div>
+                                <div className={styles.arrow}></div>
                             </div>
                         </motion.div>
                     ))}
