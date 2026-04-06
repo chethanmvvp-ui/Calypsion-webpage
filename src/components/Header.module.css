@@ -4,9 +4,11 @@
     left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
     z-index: 1000;
-    background: transparent;
-    backdrop-filter: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(253, 246, 243, 0.64);
+    backdrop-filter: blur(6px) saturate(1.04);
+    -webkit-backdrop-filter: blur(6px) saturate(1.04);
+    border-bottom: 1px solid rgba(0, 59, 50, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -21,8 +23,8 @@
 }
 
 .menuOpen {
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom-color: rgba(0, 0, 0, 0.1);
+    background: rgba(253, 246, 243, 0.8);
+    border-bottom-color: rgba(0, 59, 50, 0.14);
 }
 
 .headerContent {
@@ -47,6 +49,14 @@
     z-index: 1001;
 }
 
+.mobileLogoBadge {
+    display: none;
+}
+
+.mobileLogoIcon {
+    display: none;
+}
+
 .logoText {
     font-family: var(--font-mono);
     font-size: 14px;
@@ -69,7 +79,7 @@
 }
 
 .contactBtn {
-    background: #CADBC7;
+    background: #cadbc7;
     border: 1px solid #000;
     color: #080808;
     font-family: var(--font-mono);
@@ -81,7 +91,11 @@
     gap: 6px;
     cursor: pointer;
     transition: all 0.3s;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+    clip-path: polygon(0 0,
+            100% 0,
+            100% calc(100% - 6px),
+            calc(100% - 6px) 100%,
+            0 100%);
 }
 
 .contactBtn:hover {
@@ -150,6 +164,20 @@
     transition: all 0.3s;
     border-radius: 2px;
     margin: 2px 0;
+}
+
+.mobileContactAction {
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mobileMenuContactBtn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.65rem;
 }
 
 .mobileNavLink:last-child {
@@ -226,6 +254,11 @@
         padding: 6px 12px;
         font-size: 9px;
     }
+
+    .mobileMenuContactBtn {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -235,6 +268,40 @@
 
     .mobileMenu {
         right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobileLogoBadge {
+        display: inline-flex;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        margin-right: 8px;
+        flex-shrink: 0;
+        clip-path: polygon(0 0,
+                100% 0,
+                100% calc(100% - 6px),
+                calc(100% - 6px) 100%,
+                0 100%);
+    }
+
+    .mobileLogoIcon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+
+    .headerAction {
+        display: none;
+    }
+
+    .logoText {
+        letter-spacing: 1.5px;
     }
 }
 
