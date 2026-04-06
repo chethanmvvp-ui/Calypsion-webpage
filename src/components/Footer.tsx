@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import styles from './Footer.module.css';
 import { TextReveal } from './TextReveal';
+import Image from 'next/image';
 
 export default function Footer() {
     const containerVariants = {
@@ -65,9 +66,11 @@ export default function Footer() {
                         className={styles.brandColumn}
                     >
                         <h2 className={styles.logo}>
-                            <img
+                            <Image
                                 src="/images/Logo2.png"
                                 alt="Calypsion Logo"
+                                width={40}
+                                height={40}
                                 className={styles.logoImage}
                             />
                             <TextReveal

@@ -5,6 +5,7 @@ import styles from './Modules.module.css';
 import type { TargetAndTransition, Variants } from 'framer-motion';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeIn } from './FadeIn';
+import Image from 'next/image';
 import { ProjectModal } from './ProjectModal';
 import { IframeModal } from './IframeModal';
 import type { LucideIcon } from 'lucide-react';
@@ -292,7 +293,13 @@ export default function Modules() {
                                         className={styles.floatingHud}
                                     >
                                         <div className={styles.hudImageWrapper}>
-                                            <img src={activeModule.image} alt={activeModule.title} className={styles.hudImage} />
+                                            <Image
+                                                src={activeModule.image}
+                                                alt={activeModule.title}
+                                                fill
+                                                className={styles.hudImage}
+                                                style={{ objectFit: 'cover' }}
+                                            />
                                         </div>
                                         <div className={styles.hudInfo}>
                                             <span className={styles.hudId}>CAPABILITY_ID: {activeModule.id}</span>
