@@ -11,12 +11,18 @@
     display: flex;
     align-items: center;
     font-family: var(--font-mono);
-    animation: bannerBlink 2s infinite ease-in-out;
 }
 
 @keyframes bannerBlink {
-    0%, 100% { background: #d32f2f; }
-    50% { background: #ff1744; }
+
+    0%,
+    100% {
+        background: #d32f2f;
+    }
+
+    50% {
+        background: #ff1744;
+    }
 }
 
 .container {
