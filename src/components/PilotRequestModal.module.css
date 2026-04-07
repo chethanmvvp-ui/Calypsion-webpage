@@ -70,7 +70,7 @@
 }
 
 .title {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 4.5vw, 2.4rem);
     font-family: var(--font-display);
     letter-spacing: -0.02em;
     border-bottom: 1px solid var(--border-color);
@@ -100,7 +100,7 @@
 
 .infoTitle {
     font-family: var(--font-mono);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-primary);
@@ -108,7 +108,7 @@
 }
 
 .description {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     margin-bottom: 2rem;
     color: var(--text-secondary);
@@ -123,7 +123,7 @@
     position: relative;
     padding-left: 2rem;
     margin-bottom: 0.85rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-primary);
 }
 
@@ -177,17 +177,22 @@
 
 .phoneRow {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+}
+
+.countryInput {
+    width: 70px !important;
+    text-align: center;
 }
 
 .row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 1.5rem;
 }
 
 .actionArea {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .submitBtn {

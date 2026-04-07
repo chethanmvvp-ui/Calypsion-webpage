@@ -19,7 +19,7 @@ const DEFAULT_SETTINGS: ExpoSettings = {
     location: 'MARRAKESH, MOROCCO',
     booth: '20D-113',
     description: 'Connecting the next generation of industrial operations with our predictive AI ecosystem. Join our technical engineers for a deep-dive walkthrough.',
-    imageURL: '/images/expo/certificate.png'
+    imageURL: '/images/expo/ExpoBanner.jpeg'
 };
 
 interface ExpoContextType {
