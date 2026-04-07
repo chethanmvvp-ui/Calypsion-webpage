@@ -299,7 +299,13 @@ export default function Modules() {
                                             />
                                         </div>
                                         <div className={styles.hudInfo}>
-                                            <span className={styles.hudId}>CAPABILITY_ID: {activeModule.id}</span>
+                                            <div className={styles.hudMeta}>
+                                                <span className={styles.hudId}>CAPABILITY_ID: {activeModule.id}</span>
+                                                <span className={styles.hudStatus}>
+                                                    <span className={styles.hudStatusDot} />
+                                                    {activeModule.status}
+                                                </span>
+                                            </div>
                                             <h3 className={styles.hudTitle}>{activeModule.title}</h3>
                                             <p className={styles.hudDesc}>{activeModule.description}</p>
 

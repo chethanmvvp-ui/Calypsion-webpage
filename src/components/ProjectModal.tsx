@@ -86,6 +86,13 @@ export function ProjectModal({ module, product, onClose, onLaunch }: ProjectModa
                         Close &times;
                     </button>
 
+                    {module?.status && (
+                        <div className={styles.statusBadge}>
+                            <span className={styles.statusDot} />
+                            {module.status}
+                        </div>
+                    )}
+
                     <div className={styles.headerArea}>
                         <motion.span 
                             initial={{ opacity: 0, x: -10 }}

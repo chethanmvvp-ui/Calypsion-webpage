@@ -70,7 +70,7 @@
 }
 
 .title {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 4.5vw, 2.2rem);
     font-family: var(--font-display);
     letter-spacing: -0.02em;
     border-bottom: 1px solid var(--border-color);
@@ -111,7 +111,7 @@
 }
 
 .description {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     margin-bottom: 2rem;
     color: var(--text-secondary);
@@ -149,7 +149,7 @@
     position: relative;
     padding-left: 2rem;
     margin-bottom: 0.85rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-primary);
 }
 
@@ -176,20 +176,20 @@
 
 .specKey {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
     text-transform: uppercase;
 }
 
 .specValue {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
 }
 
 .modalActionWrapper {
-    margin-top: 2rem;
-    padding-top: 2rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -283,5 +283,29 @@
 
     .launchBtn {
         padding: 1rem;
+    }
+}
+.statusBadge {
+    position: absolute;
+    top: 2.1rem; /* Slightly lower than closeBtn for horizontal alignment */
+    right: 12rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.4rem 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+    .statusBadge {
+        top: 1.1rem;
+        right: 10rem;
     }
 }

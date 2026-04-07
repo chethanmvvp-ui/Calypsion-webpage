@@ -266,14 +266,40 @@
     flex-direction: column;
 }
 
+.hudMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
 .hudId {
     font-family: var(--font-mono);
     font-size: 10px;
     color: #0a0f0a;
-    margin-bottom: 2px;
     display: block;
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+.hudStatus {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: #0a0f0a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.hudStatusDot {
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
 }
 
 .hudTitle {
