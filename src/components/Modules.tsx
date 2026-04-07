@@ -131,7 +131,7 @@ const modulesData: PlatformModule[] = [
         id: '06',
         title: 'RTLS 3D Model',
         slotClass: 'slot_6',
-        launchUrl: 'http://4.188.84.137:5173/dashboard.html',
+        launchUrl: 'https://rtls.link360.in',
         icon: Box,
         animation: {
             rotateY: [0, 360],
