@@ -113,7 +113,7 @@ const modulesData: PlatformModule[] = [
         id: '05',
         title: 'LinkVision',
         slotClass: 'slot_5',
-        launchUrl: 'https://link-vision.vercel.app/',
+        launchUrl: 'https://linkvision.vercel.app/',
         icon: Eye,
         animation: {
             x: [-3, 3, -3],
