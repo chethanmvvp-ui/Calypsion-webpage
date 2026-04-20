@@ -16,7 +16,7 @@ function readSettings() {
 }
 
 // Helper to write settings
-function writeSettings(settings: any) {
+function writeSettings(settings: Record<string, unknown>) {
     try {
         fs.writeFileSync(DATA_PATH, JSON.stringify(settings, null, 4), 'utf8');
         return true;
@@ -43,13 +43,13 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Invalid settings format' }, { status: 400 });
         }
 
-        const success = writeSettings(newSettings);
+        const success = writeSettings(newSettings as Record<string, unknown>);
         if (!success) {
             return NextResponse.json({ error: 'Failed to save settings' }, { status: 500 });
         }
 
         return NextResponse.json(newSettings);
-    } catch (error) {
+    } catch (_error) {
         return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
 }

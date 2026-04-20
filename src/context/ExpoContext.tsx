@@ -32,7 +32,6 @@ const ExpoContext = createContext<ExpoContextType | undefined>(undefined);
 
 export function ExpoProvider({ children }: { children: React.ReactNode }) {
     const [settings, setSettings] = useState<ExpoSettings>(DEFAULT_SETTINGS);
-    const [isInitialized, setIsInitialized] = useState(false);
 
     // Initial load from server-side API
     useEffect(() => {
@@ -53,10 +52,8 @@ export function ExpoProvider({ children }: { children: React.ReactNode }) {
                 if (saved) {
                     try {
                         setSettings(JSON.parse(saved));
-                    } catch (err) {}
+                    } catch (_err) {}
                 }
-            } finally {
-                setIsInitialized(true);
             }
         }
         fetchSettings();
