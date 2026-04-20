@@ -52,7 +52,7 @@ export function ExpoProvider({ children }: { children: React.ReactNode }) {
                 if (saved) {
                     try {
                         setSettings(JSON.parse(saved));
-                    } catch (_err) {}
+                    } catch { }
                 }
             }
         }
