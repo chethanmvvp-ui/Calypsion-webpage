@@ -34,32 +34,64 @@ export function ExpoProvider({ children }: { children: React.ReactNode }) {
     const [settings, setSettings] = useState<ExpoSettings>(DEFAULT_SETTINGS);
     const [isInitialized, setIsInitialized] = useState(false);
 
-    // Load from localStorage on mount
+    // Initial load from server-side API
     useEffect(() => {
-        const saved = localStorage.getItem('calypsion_expo_settings');
-        if (saved) {
+        async function fetchSettings() {
             try {
-                setSettings(JSON.parse(saved));
+                const response = await fetch('/api/expo-settings');
+                if (response.ok) {
+                    const data = await response.json();
+                    setSettings(data);
+                } else {
+                    // Fallback to localStorage if API is not available
+                    const saved = localStorage.getItem('calypsion_expo_settings');
+                    if (saved) setSettings(JSON.parse(saved));
+                }
             } catch (e) {
-                console.error('Failed to parse expo settings', e);
+                console.error('Failed to fetch expo settings from API', e);
+                const saved = localStorage.getItem('calypsion_expo_settings');
+                if (saved) {
+                    try {
+                        setSettings(JSON.parse(saved));
+                    } catch (err) {}
+                }
+            } finally {
+                setIsInitialized(true);
             }
         }
-        setIsInitialized(true);
+        fetchSettings();
     }, []);
 
-    // Save to localStorage on change
-    useEffect(() => {
-        if (isInitialized) {
-            localStorage.setItem('calypsion_expo_settings', JSON.stringify(settings));
-        }
-    }, [settings, isInitialized]);
+    const updateSettings = async (newSettings: Partial<ExpoSettings>) => {
+        const updated = { ...settings, ...newSettings };
+        setSettings(updated);
 
-    const updateSettings = (newSettings: Partial<ExpoSettings>) => {
-        setSettings(prev => ({ ...prev, ...newSettings }));
+        try {
+            // Persist to server
+            await fetch('/api/expo-settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updated),
+            });
+            // Backup to localStorage
+            localStorage.setItem('calypsion_expo_settings', JSON.stringify(updated));
+        } catch (e) {
+            console.error('Failed to save expo settings to API', e);
+        }
     };
 
-    const resetSettings = () => {
+    const resetSettings = async () => {
         setSettings(DEFAULT_SETTINGS);
+        try {
+            await fetch('/api/expo-settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(DEFAULT_SETTINGS),
+            });
+            localStorage.setItem('calypsion_expo_settings', JSON.stringify(DEFAULT_SETTINGS));
+        } catch (e) {
+            console.error('Failed to reset expo settings', e);
+        }
     };
 
     return (
