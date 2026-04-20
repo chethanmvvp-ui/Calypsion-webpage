@@ -13,7 +13,7 @@ interface ExpoSettings {
 }
 
 const DEFAULT_SETTINGS: ExpoSettings = {
-    isVisible: true,
+    isVisible: false, // Set to false to turn off banner permanently. Change to true to reactivate.
     title: 'GITEX Africa 2026',
     date: '7 - 8 - 9 APRIL',
     location: 'MARRAKESH, MOROCCO',
@@ -39,7 +39,11 @@ export function ExpoProvider({ children }: { children: React.ReactNode }) {
         const saved = localStorage.getItem('calypsion_expo_settings');
         if (saved) {
             try {
-                setSettings(JSON.parse(saved));
+                const parsed = JSON.parse(saved);
+                setSettings({
+                    ...parsed,
+                    isVisible: DEFAULT_SETTINGS.isVisible // Force code-level visibility preference
+                });
             } catch (e) {
                 console.error('Failed to parse expo settings', e);
             }
